@@ -1,7 +1,8 @@
+const CategoryList = require("../models/categorySchema");
 const SubCategoryList = require("../models/subCategorySchema");
 
 async function subCategoryController(req, res) {
-  const { name, description } = req.body;
+  const { name, description, category } = req.body;
   const duplicateSubCategory = await SubCategoryList.find({ name });
   if (duplicateSubCategory.length > 0) {
     res.json({ error: "Already this sub-category created, try again!" });
@@ -9,7 +10,15 @@ async function subCategoryController(req, res) {
   const subCategory = new SubCategoryList({
     name,
     description,
+    category,
   });
+  // console.log(subCategory._id);
+  // console.log(subCategory.category);
+  await CategoryList.findOneAndUpdate(
+    { _id: subCategory.category },
+    { $push: { subCategory: subCategory._id } },
+    { new: true }
+  );
   res.json({ success: "Sub-category has been created successfully!" });
   subCategory.save();
 }
