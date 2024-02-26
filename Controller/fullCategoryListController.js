@@ -11,9 +11,7 @@ async function getAllCategoryList(req, res) {
 // Get All Sub-Category List
 
 async function getAllSubCategoryList(req, res) {
-  const data = await SubCategoryList.find({}).populate(
-    "category: {name, status}"
-  );
+  const data = await SubCategoryList.find({}).populate("category");
   res.json(data);
 }
 
