@@ -26,6 +26,13 @@ const merchantSchema = new Schema({
     type: Schema.Types.ObjectId,
     res: "Product",
   },
+  created: {
+    type: Date,
+    default: new Date(),
+  },
+  update: {
+    type: Date,
+  }
 });
 
 module.exports = mongoose.model("MerchantList", merchantSchema);

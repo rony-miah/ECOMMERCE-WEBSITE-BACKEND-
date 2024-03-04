@@ -28,7 +28,7 @@ const categorySchema = new Schema({
   },
   update: {
     type: Date,
-  },
+  }
 });
 
 module.exports = mongoose.model("CategoryList", categorySchema);
